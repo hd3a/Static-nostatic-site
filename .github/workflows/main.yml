@@ -1,0 +1,33 @@
+name: Generate Time JSON Every Hour
+
+on:
+  schedule:
+    - cron: '0 * * * *'  # 毎時0分（1時間ごと）
+  workflow_dispatch:     # 手動実行も可能
+
+jobs:
+  generate-json:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Generate time.json
+        run: |
+          mkdir -p output
+          echo "{\"time\": \"$(date --iso-8601=seconds)\"}" > output/time.json
+
+      - name: Commit and Push
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          cp output/time.json ./time.json
+          git add time.json
+          git commit -m "Update time.json at $(date)" || echo "No changes to commit"
+          git push
