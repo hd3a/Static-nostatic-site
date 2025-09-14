@@ -2,6 +2,14 @@
 
 このリポジトリは、GitHub Actions を使って **10分ごとに現在時刻（UST）を含む JSON ファイル（time.json）を生成し、自動で GitHub Pages に反映** する仕組みを持っています。
 <p align="center"> <a href=" https://hd3a.github.io/Static-nostatic-site/time.json" target="_blank"> <img src="https://img.shields.io/badge/Open-time.json-blue?style=for-the-badge" alt="Open time.json"> </a> </p>
+
+開けない方はこちらのリンクから
+<p align="center">
+  <a href="https://hd3a.github.io/Static-nostatic-site/time.json">
+    <strong>[ 🔗 最新の time.json を開く ]</strong>
+  </a>
+</p>
+
 ---
 
 ## 🔧 機能概要
