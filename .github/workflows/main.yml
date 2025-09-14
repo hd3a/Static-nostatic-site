@@ -2,7 +2,7 @@ name: Generate Time JSON Every Hour
 
 on:
   schedule:
-    - cron: '0/10 * * * *'  # 毎時0分（1時間ごと）
+    - cron: '*/10 * * * *'  # 毎時0分（1時間ごと）
   workflow_dispatch:     # 手動実行も可能
 
 jobs:
