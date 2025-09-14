@@ -26,7 +26,7 @@ jobs:
       - name: Commit and Push
         run: |
           git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git config user.email "github-actions[bot]@example.com"
           cp output/time.json ./time.json
           git add time.json
           git commit -m "Update time.json at $(date)" || echo "No changes to commit"
