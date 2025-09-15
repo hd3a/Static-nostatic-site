@@ -1,4 +1,4 @@
-name: Generate Time JSON Every Hour
+name: akitaman
 
 on:
   schedule:
