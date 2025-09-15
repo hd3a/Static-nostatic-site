@@ -27,6 +27,6 @@ jobs:
         run: |
           git config --global user.name 'GitHub Actions'
           git config --global user.email 'actions@github.com'
-          git add weather.md
+          git add weather_6hourly.md
           git commit -m "Update weather info" || echo "No changes"
           git push
