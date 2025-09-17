@@ -25,7 +25,7 @@ jobs:
 
       - name: Commit and Push
         run: |
-          git config user.name "github-actions[bot]"
+          git config user.name "ぺーじず自動更新くん"
           git config user.email "github-actions[bot]@example.com"
           cp output/time.json ./time.json
           git add time.json
