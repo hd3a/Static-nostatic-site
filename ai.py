@@ -7,7 +7,7 @@ REPO = os.environ["REPO"]
 ISSUE_NUMBER = os.environ["ISSUE_NUMBER"]
 CONTENT = os.environ.get("COMMENT_BODY") or os.environ.get("ISSUE_BODY", "")
 
-# AI生成
+# Hugging Face API呼び出し
 hf_headers = {"Authorization": f"Bearer {HF_API_TOKEN}"}
 hf_data = {"inputs": f"以下の質問に丁寧に返信してください:\n{CONTENT}"}
 
@@ -17,7 +17,15 @@ response = requests.post(
     json=hf_data
 )
 
-reply_text = response.json()[0]["generated_text"]
+data = response.json()
+
+# エラー処理
+if "error" in data:
+    reply_text = f"⚠️ AI応答取得エラー: {data['error']}"
+elif isinstance(data, list) and "generated_text" in data[0]:
+    reply_text = data[0]["generated_text"]
+else:
+    reply_text = str(data)
 
 # GitHubにコメント投稿
 gh_headers = {
