@@ -27,4 +27,4 @@ jobs:
           ISSUE_NUMBER: ${{ github.event.issue.number }}
           COMMENT_ID: ${{ github.event.comment.id }}
           COMMENT_BODY: ${{ github.event.comment.body }}
-        run: python generate_reply.py
+        run: python ai.py
