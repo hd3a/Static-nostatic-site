@@ -1,12 +1,13 @@
-name: AI Animated Bar
+name: AI Reply to Comments
 
 on:
-  issues:
-    types: [opened, edited]  # Issue作成/編集で発動
+  issue_comment:
+    types: [created]  # コメント作成時にトリガー
 
 jobs:
-  generate-bar:
+  ai_reply:
     runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v3
 
@@ -16,13 +17,14 @@ jobs:
           python-version: 3.11
 
       - name: Install dependencies
-        run: pip install gpt4all requests
+        run: pip install requests
 
-      - name: Generate Animated Bar
-        run: python generate_bar_from_issue.py
-
-      - name: Post reply
-        uses: peter-evans/create-or-update-comment@v4
-        with:
-          issue-number: ${{ github.event.issue.number }}
-          body: ${{ steps.generate_bar.outputs.comment_body }}
+      - name: Generate and Reply
+        env:
+          HF_API_TOKEN: ${{ secrets.HF_API_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+          COMMENT_ID: ${{ github.event.comment.id }}
+          COMMENT_BODY: ${{ github.event.comment.body }}
+        run: python generate_reply.py
