@@ -12,7 +12,7 @@ hf_headers = {"Authorization": f"Bearer {HF_API_TOKEN}"}
 hf_data = {"inputs": f"以下の質問に丁寧に返信してください:\n{CONTENT}"}
 
 response = requests.post(
-    "https://api-inference.huggingface.co/models/TheBloke/guanaco-7B-GGML",
+    "https://huggingface.co/meta-llama/Meta-Llama-3-8B-Instruct",
     headers=hf_headers,
     json=hf_data
 )
