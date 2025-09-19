@@ -1,0 +1,28 @@
+name: AI Animated Bar
+
+on:
+  issues:
+    types: [opened, edited]  # Issue作成/編集で発動
+
+jobs:
+  generate-bar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.11
+
+      - name: Install dependencies
+        run: pip install gpt4all requests
+
+      - name: Generate Animated Bar
+        run: python generate_bar_from_issue.py
+
+      - name: Post reply
+        uses: peter-evans/create-or-update-comment@v4
+        with:
+          issue-number: ${{ github.event.issue.number }}
+          body: ${{ steps.generate_bar.outputs.comment_body }}
